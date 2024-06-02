@@ -1,2 +1,3 @@
 # 🌐 MECG
-Sitio personal
+
+Sitio presentación profesional 👋
