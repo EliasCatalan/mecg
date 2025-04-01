@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Elias Catalán</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        h1, h2 {
+            color: #0366d6;
+        }
+        section {
+            margin-top: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background: #0366d6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #024ea2;
+        }
+        .dark-mode {
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        .dark-mode .container {
+            background: #161b22;
+            box-shadow: none;
+        }
+        .dark-mode h1, .dark-mode h2 {
+            color: #58a6ff;
+        }
+        .dark-mode li {
+            background: #21262d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Elias Catalán García</h1>
+            <button id="theme-toggle">Modo Oscuro</button>
+        </header>
+        <section class="about">
+            <h2>Sobre Mí</h2>
+            <p>Desarrollador Full-Stack con más de 8 años de experiencia en el diseño, desarrollo e implementación de aplicaciones web...</p>
+        </section>
+        <section class="skills">
+            <h2>Habilidades</h2>
+            <ul>
+                <li>PHP</li>
+                <li>JavaScript</li>
+                <li>MySQL</li>
+                <li>CodeIgniter</li>
+            </ul>
+        </section>
+        <section class="contact">
+            <h2>Contacto</h2>
+            <ul>
+                <li>📍 Santiago, San Bernardo, Chile</li>
+                <li>📧 <a href="mailto:ecatalan.code@gmail.com">ecatalan.code@gmail.com</a></li>
+                <li>🔗 <a href="https://www.linkedin.com/in/ecatalan" target="_blank">LinkedIn</a></li>
+                <li>💻 <a href="https://www.github.com/EliasCatalan" target="_blank">GitHub</a></li>
+            </ul>
+        </section>
+    </div>
+    <script>
+        document.getElementById("theme-toggle").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+            this.textContent = document.body.classList.contains("dark-mode") ? "Modo Claro" : "Modo Oscuro";
+        });
+    </script>
+</body>
+</html>
