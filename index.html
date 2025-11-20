@@ -3,44 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Elias Catalán</title>
+    <title>Elias Catalán García - Full-Stack Developer</title>
+    <meta name="description" content="Desarrollador Full-Stack con más de 10 años de experiencia en diseño, desarrollo e implementación de aplicaciones web.">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Elias Catalán García</h1>
-            <small>Software Developer Full-Stack</small>
-            <button id="theme-toggle"></button>
-        </header>
-        <section class="about">
-            <h2>Sobre Mí</h2>
-            <p style="text-align: justify;">
-                Desarrollador Full-Stack con más de 8 años de experiencia en el diseño, desarrollo e implementación de aplicaciones web. Especialista en múltiples lenguajes de programación y 
-                librerías tanto de front-end como back-end. Apasionado por resolver problemas complejos, brindar soluciones innovadoras y fomentar la mejora continua en la calidad del 
-                código y la experiencia del usuario. Mi enfoque está en construir soluciones escalables y eficientes, manteniendo siempre un alto estándar de excelencia técnica.
-            </p>
-        </section>
-        <section class="skills">
-            <h2>Habilidades</h2>
-            <ul>
-                <li>PHP</li>
-                <li>JavaScript</li>
-                <li>MySQL</li>
-                <li>NodeJS + Express</li>
-                <li>CodeIgniter</li>
-            </ul>
-        </section>
-        <section class="contact">
-            <h2>Contacto</h2>
-            <ul>
-                <li>📍 Santiago, San Bernardo, Chile</li>
-                <li>📧 <a href="mailto:ecatalan.code@gmail.com">ecatalan.code@gmail.com</a></li>
-                <li>🔗 <a href="https://www.linkedin.com/in/ecatalan" target="_blank">LinkedIn</a></li>
-                <li>💻 <a href="https://www.github.com/EliasCatalan" target="_blank">GitHub</a></li>
-            </ul>
-        </section>
+<body class="dark-mode">
+    <div class="github-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-section">
+                <div class="profile-avatar">
+                    <img src="https://avatars.githubusercontent.com/u/13459196?v=4" alt="Elias Catalán" class="avatar-img">
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name">Elias Catalán</h1>
+                    <p class="profile-username">EliasCatalan</p>
+                </div>
+                <p class="profile-bio">💻 FullStack Developer 🚴🏻‍♀️ Ciclista 🐕‍🦺🏔️</p>
+                <button id="theme-toggle" class="btn-theme-toggle">
+                    <span class="theme-icon">☀️</span>
+                </button>
+            </div>
+
+            <div class="profile-details">
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25Z"></path><path d="M13 8a.75.75 0 0 1-.75.75h-3.5a.75.75 0 0 1 0-1.5h3.5A.75.75 0 0 1 13 8ZM3 8a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 0 1.5h-3.5A.75.75 0 0 1 3 8Z"></path></svg>
+                    <span>40 followers · 3 following</span>
+                </div>
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"></path></svg>
+                    <span>Chile</span>
+                </div>
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z"></path></svg>
+                    <span id="current-time">21:48 (UTC -03:00)</span>
+                </div>
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"></path></svg>
+                    <a href="mailto:ecatalan.code@gmail.com">ecatalan.code@gmail.com</a>
+                </div>
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="M7.775 3.275C7.64 2.33 7.03 1.677 6 1.677c-1.03 0-1.64.653-1.775 1.598L4.15 4.2c-.042.358-.024.65.05.922.07.266.197.487.392.674.204.194.47.34.806.444.332.103.7.162 1.102.162.402 0 .77-.059 1.102-.162.337-.104.602-.25.806-.444.195-.187.322-.408.392-.674.074-.272.092-.564.05-.922Zm.224 1.626c-.06.235-.153.405-.288.52a1.59 1.59 0 0 1-.577.315c-.253.076-.58.12-.934.12s-.681-.044-.934-.12a1.59 1.59 0 0 1-.577-.316c-.135-.114-.228-.284-.288-.519a1.772 1.772 0 0 1-.036-.694l.075-.83c.088-.582.467-1.022 1.15-1.022.683 0 1.062.44 1.15 1.022l.075.83c.036.226.028.47-.036.694ZM13.78 4.826c-.107-.957-.717-1.61-1.747-1.61-1.03 0-1.64.653-1.775 1.598l-.075.83c-.042.358-.024.65.05.922.07.266.197.487.392.674.204.194.47.34.806.444.332.103.7.162 1.102.162.402 0 .77-.059 1.102-.162.337-.104.602-.25.806-.444.195-.187.322-.408.392-.674.074-.272.092-.564.05-.922l-.103-.998Zm-1.527 2.506c-.06.235-.153.405-.288.52a1.59 1.59 0 0 1-.577.315c-.253.076-.58.12-.934.12s-.681-.044-.934-.12a1.59 1.59 0 0 1-.577-.316c-.135-.114-.228-.284-.288-.519a1.772 1.772 0 0 1-.036-.694l.075-.83c.088-.582.467-1.022 1.15-1.022.683 0 1.062.44 1.15 1.022l.075.83c.036.226.028.47-.036.694ZM6 10.677c-1.03 0-1.64.653-1.775 1.598l-.075.83c-.042.358-.024.65.05.922.07.266.197.487.392.674.204.194.47.34.806.444.332.103.7.162 1.102.162.402 0 .77-.059 1.102-.162.337-.104.602-.25.806-.444.195-.187.322-.408.392-.674.074-.272.092-.564.05-.922l-.103-.998c-.107-.957-.717-1.61-1.747-1.61Zm.224 1.626c-.06.235-.153.405-.288.52a1.59 1.59 0 0 1-.577.315c-.253.076-.58.12-.934.12s-.681-.044-.934-.12a1.59 1.59 0 0 1-.577-.316c-.135-.114-.228-.284-.288-.519a1.772 1.772 0 0 1-.036-.694l.075-.83c.088-.582.467-1.022 1.15-1.022.683 0 1.062.44 1.15 1.022l.075.83c.036.226.028.47-.036.694Z"></path></svg>
+                    <a href="https://www.linkedin.com/in/ecatalan" target="_blank" rel="noopener noreferrer">in/ecatalan</a>
+                </div>
+                <div class="detail-item">
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16"><path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25Zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0Z"></path></svg>
+                    <a href="https://eliascatalan.github.io/mecg" target="_blank" rel="noopener noreferrer">eliascatalan.github.io/mecg</a>
+                </div>
+            </div>
+
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <div class="achievement-badges">
+                    <div class="badge" title="Pull Shark">🦈</div>
+                    <div class="badge" title="YOLO">⚡</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="profile-header-mobile">
+                <h1>👨‍💻 Elias Catalán García</h1>
+            </div>
+
+            <!-- About Section -->
+            <section class="readme-section">
+                <div class="section-header">
+                    <h2>📄 README.md</h2>
+                </div>
+                <div class="readme-content">
+                    <p class="lead-text">
+                        Desarrollador Full-Stack con más de 10 años de experiencia en el diseño, desarrollo e implementación de aplicaciones web. 
+                        Especialista en múltiples lenguajes de programación y librerías tanto de <code>frontend</code> como <code>backend</code>. 
+                        Apasionado por resolver problemas complejos, brindar soluciones innovadoras y fomentar la mejora continua en la calidad del 
+                        código y la experiencia del usuario. Mi enfoque está en construir soluciones escalables y eficientes, manteniendo 
+                        siempre un alto estándar de excelencia técnica.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Tech Stack Section -->
+            <section class="tech-stack-section">
+                <div class="section-header">
+                    <h2>🧠 Stack Tecnológico</h2>
+                </div>
+                <div class="tech-table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="category">🖥️ Frontend</td>
+                                <td class="technologies">
+                                    <span class="tech-badge">JavaScript (ES6)</span>
+                                    <span class="tech-badge">React</span>
+                                    <span class="tech-badge">Bootstrap</span>
+                                    <span class="tech-badge">DataTables</span>
+                                    <span class="tech-badge">jQuery</span>
+                                    <span class="tech-badge">Angular</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="category">⚙️ Backend</td>
+                                <td class="technologies">
+                                    <span class="tech-badge">Node.js + Express</span>
+                                    <span class="tech-badge">NestJS</span>
+                                    <span class="tech-badge">PHP</span>
+                                    <span class="tech-badge">CodeIgniter</span>
+                                    <span class="tech-badge">Laravel</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="category">💾 Bases de Datos</td>
+                                <td class="technologies">
+                                    <span class="tech-badge">MySQL</span>
+                                    <span class="tech-badge">SQLServer</span>
+                                    <span class="tech-badge">PostgreSQL</span>
+                                    <span class="tech-badge">MongoDB</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="category">🪄 Herramientas / DevOps</td>
+                                <td class="technologies">
+                                    <span class="tech-badge">Git</span>
+                                    <span class="tech-badge">GitHub / GitLab</span>
+                                    <span class="tech-badge">Docker</span>
+                                    <span class="tech-badge">AWS</span>
+                                    <span class="tech-badge">Jenkins</span>
+                                    <span class="tech-badge">CI / CD</span>
+                                    <span class="tech-badge">POSTMAN</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="category">♟️ GUI para BBDD</td>
+                                <td class="technologies">
+                                    <span class="tech-badge">MySQL Workbench</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="category">💡 Gist</td>
+                                <td class="technologies">
+                                    <a href="https://gist.github.com/EliasCatalan" target="_blank" rel="noopener noreferrer" class="gist-link">EliasCatalan.gist</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section class="experience-section">
+                <div class="section-header">
+                    <h2>🏢 Experiencia Laboral</h2>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h3>📌 Full-Stack Developer</h3>
+                        <span class="company">Aboservicios SPA, Santiago, Chile</span>
+                    </div>
+                    <div class="exp-date">📅 Mayo 2024 - Presente</div>
+                    <ul class="exp-details">
+                        <li>Implementé la integración con la API de <a href="https://simplefactura.cl/" target="_blank" rel="noopener noreferrer">SimpleFactura</a> y desarrollé un módulo personalizado para la generación de Documentos Tributarios Electrónicos (DTEs), asegurando el cumplimiento de normativas fiscales y facilitando la automatización de procesos contables.</li>
+                        <li>Realicé un análisis detallado de los requerimientos y solicitudes junto a Key Users, garantizando una comprensión integral de sus necesidades y traduciendo estas en soluciones técnicas eficaces y alineadas con los objetivos del negocio.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h3>📌 Full-Stack Developer</h3>
+                        <span class="company">MIMS Projects, Santiago, Chile</span>
+                    </div>
+                    <div class="exp-date">📅 Marzo 2023 - Mayo 2024</div>
+                    <ul class="exp-details">
+                        <li>Realicé el mantenimiento y la mejora continua de aplicaciones, resolviendo errores de forma eficiente y desarrollando nuevas funcionalidades para satisfacer las necesidades cambiantes de los usuarios y del negocio.</li>
+                        <li>Refactoricé solicitudes críticas implementando el uso de Promises en JavaScript, lo que permitió mejorar significativamente la experiencia del usuario al optimizar la gestión de operaciones asíncronas y reducir tiempos de respuesta.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <h3>📌 Full-Stack Developer</h3>
+                        <span class="company">Fundación Integra / Procesac S.A, Santiago, Chile</span>
+                    </div>
+                    <div class="exp-date">📅 Marzo 2015 - Marzo 2023</div>
+                    <ul class="exp-details">
+                        <li>Lideré un equipo de desarrollo para crear una aplicación web que permite gestionar reuniones y planificaciones en jardines infantiles, optimizando procesos administrativos y mejorando la organización institucional.</li>
+                        <li>Diseñé y desarrollé proyectos a medida, adaptados a las necesidades específicas de los clientes, asegurando soluciones funcionales y escalables.</li>
+                        <li>Guié a nuevos desarrolladores a través de mentorías, ayudándolos a mejorar sus habilidades técnicas y a integrarse de manera efectiva en el equipo de desarrollo.</li>
+                        <li>Implementé renovaciones tecnológicas mediante el uso de frameworks y librerías como CodeIgniter, Bootstrap y jQuery, mejorando la calidad del código y la experiencia del usuario.</li>
+                        <li>Trabajé en estrecha colaboración con desarrolladores y diseñadores en entornos ágiles, aplicando metodologías como SCRUM y Agile para garantizar entregas eficientes y de alta calidad.</li>
+                        <li>Lideré la integración y puesta en marcha del servicio <a href="https://queue-it.com/" target="_blank" rel="noopener noreferrer">Queue-it</a> para gestionar el tráfico durante las aperturas de postulaciones a jardines infantiles y salas cuna, asegurando la estabilidad y accesibilidad del sistema bajo alta demanda.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="education-section">
+                <div class="section-header">
+                    <h2>🏫 Educación</h2>
+                </div>
+                <div class="education-list">
+                    <div class="education-item">
+                        <div class="edu-icon">📜</div>
+                        <div class="edu-content">
+                            <h4>Certificado Scrum ID: 43247919</h4>
+                            <p class="edu-institution">CertiProf, Scrum Foundation Certificate (SFC) – (Spanish)</p>
+                            <p class="edu-date">6 de Agosto de 2020</p>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-icon">🎓</div>
+                        <div class="edu-content">
+                            <h4>Ingeniería en Computación e Informática</h4>
+                            <p class="edu-institution">Instituto Profesional La Araucana, Santiago, Chile</p>
+                            <p class="edu-date">Marzo 2011 - Diciembre 2015</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <div class="section-header">
+                    <h2>🌐 Proyectos Destacados</h2>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3><a href="https://fusion.deltainformatica.cl/" target="_blank" rel="noopener noreferrer">FUSION</a></h3>
+                        <p class="project-description">Sistema de gestión integrado de transporte.</p>
+                        <ul class="project-features">
+                            <li>Ingreso y centralización de guias de transporte y traslado de minerales</li>
+                            <li>Integración API SimpleFactura</li>
+                            <li>Emisión de Documento Tributario Electrónicos (DTE)</li>
+                            <li>Facturas de venta afectas y exentas</li>
+                            <li>Notas de crédito y debito</li>
+                            <li>Exportación de DTEs (detalle y timbre electrónico)</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3><a href="https://confirma.integra.cl/" target="_blank" rel="noopener noreferrer">CONFIRMA</a></h3>
+                        <p class="project-description">Confirmación y asignación de cupos para jardínes infantíles y salas cunas del país.</p>
+                        <ul class="project-features">
+                            <li>Permite gestionar y mantener los niños y niñas asociados a los niveles de jardínes y salas cunas</li>
+                            <li>Envío masivo de información hacia AS400</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3><a href="https://postula.integra.cl/" target="_blank" rel="noopener noreferrer">POSTULA</a></h3>
+                        <p class="project-description">Postulación a Fundación Integra para los distintos jardínes infantíles y salas cunas del país.</p>
+                        <ul class="project-features">
+                            <li>Formulario encuesta para cálculo de puntajes y vulnerabilidades (RSH)</li>
+                            <li>Búsqueda a nivel nacional de jardínes y salas cunas</li>
+                            <li>Interacción con AS400 para carga y centralización de datos</li>
+                            <li>Notificaciones: inicio, fin, aceptación y rechazo de la postulación</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <h3><a href="https://asi.integra.cl/" target="_blank" rel="noopener noreferrer">ASI</a></h3>
+                        <p class="project-description">Oficina de Informaciones, Reclamos y Sugerencias (OIRS).</p>
+                        <ul class="project-features">
+                            <li>Soluciones internas de la empresa como también para la interacción con la comunidad</li>
+                            <li>Tiempos de respuesta para los requerimientos (SLA)</li>
+                            <li>Notificaciones para derivaciones o soluciones a requerimientos</li>
+                            <li>Trazabilidad de requerimientos</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="github-footer">
+                <p>© 2025 Elias Catalán García. Todos los derechos reservados.</p>
+                <p class="footer-links">
+                    <a href="https://github.com/EliasCatalan" target="_blank" rel="noopener noreferrer">GitHub</a> · 
+                    <a href="https://www.linkedin.com/in/ecatalan" target="_blank" rel="noopener noreferrer">LinkedIn</a> · 
+                    <a href="mailto:ecatalan.code@gmail.com">Contacto</a>
+                </p>
+            </footer>
+        </main>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
