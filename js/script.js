@@ -1,4 +1,15 @@
 // ============================================
+// CURRENT YEAR & EXPERIENCE
+// ============================================
+const currentYear = new Date().getFullYear();
+document.getElementById('current-year').textContent = currentYear;
+
+// Calcular años de experiencia desde 2015
+const startYear = 2015;
+const yearsOfExperience = currentYear - startYear;
+document.getElementById('years-experience').textContent = yearsOfExperience;
+
+// ============================================
 // THEME TOGGLE
 // ============================================
 const themeToggle = document.getElementById('theme-toggle');
@@ -115,6 +126,61 @@ cards.forEach(card => {
 // ============================================
 document.querySelectorAll('a[target="_blank"]').forEach(link => {
     link.setAttribute('rel', 'noopener noreferrer');
+});
+
+// ============================================
+// NAVIGATION ACTIVE STATE
+// ============================================
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+function updateActiveNavLink() {
+    let currentSection = '';
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Actualizar al hacer scroll
+window.addEventListener('scroll', updateActiveNavLink);
+
+// Actualizar al cargar la página
+window.addEventListener('load', updateActiveNavLink);
+
+// ============================================
+// SCROLL TO TOP BUTTON
+// ============================================
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+// Mostrar/ocultar botón según scroll
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+    } else {
+        scrollToTopBtn.classList.remove('visible');
+    }
+});
+
+// Scroll suave al inicio
+scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
 
 // ============================================
