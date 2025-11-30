@@ -15,11 +15,10 @@ document.getElementById('years-experience').textContent = yearsOfExperience;
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Verificar preferencia guardada o sistema
+// Verificar preferencia guardada
 const savedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Aplicar tema inicial
+// Aplicar tema inicial - por defecto modo oscuro
 if (savedTheme) {
     if (savedTheme === 'light') {
         body.classList.remove('dark-mode');
@@ -31,16 +30,10 @@ if (savedTheme) {
         updateThemeButton(true);
     }
 } else {
-    // Por defecto modo oscuro (como GitHub)
-    if (!prefersDark) {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        updateThemeButton(false);
-    } else {
-        body.classList.add('dark-mode');
-        body.classList.remove('light-mode');
-        updateThemeButton(true);
-    }
+    // Modo oscuro por defecto
+    body.classList.add('dark-mode');
+    body.classList.remove('light-mode');
+    updateThemeButton(true);
 }
 
 // Toggle theme on button click

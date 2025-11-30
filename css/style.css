@@ -290,22 +290,26 @@ body.light-mode .badge {
     background: var(--bg-primary);
     border-bottom: 2px solid var(--border-default);
     margin-bottom: 24px;
-    padding: 12px 0;
+    padding: 16px;
     z-index: 100;
     backdrop-filter: blur(8px);
     background: rgba(13, 17, 23, 0.95);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-top: -16px;
 }
 
 body.light-mode .main-nav {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(246, 248, 250, 0.95);
     border-color: var(--border-default-light);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .nav-list {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -318,15 +322,16 @@ body.light-mode .main-nav {
 
 .nav-link {
     display: block;
-    padding: 8px 16px;
+    padding: 10px 18px;
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 20px;
     font-size: 13px;
     font-weight: 500;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     position: relative;
+    overflow: hidden;
 }
 
 .nav-link::before {
@@ -339,6 +344,7 @@ body.light-mode .main-nav {
     height: 2px;
     background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
     transition: transform 0.3s ease;
+    border-radius: 2px;
 }
 
 .nav-link:hover::before {
@@ -349,14 +355,15 @@ body.light-mode .main-nav {
     background: var(--bg-tertiary);
     color: var(--text-link);
     text-decoration: none;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(88, 166, 255, 0.15);
 }
 
 .nav-link.active {
     background: linear-gradient(135deg, rgba(88, 166, 255, 0.15) 0%, rgba(31, 111, 235, 0.15) 100%);
     color: var(--text-link);
     border: 1px solid var(--text-link);
-    box-shadow: 0 0 12px rgba(88, 166, 255, 0.2);
+    box-shadow: 0 0 16px rgba(88, 166, 255, 0.25), 0 2px 8px rgba(88, 166, 255, 0.1);
 }
 
 body.light-mode .nav-link {
@@ -370,13 +377,14 @@ body.light-mode .nav-link::before {
 body.light-mode .nav-link:hover {
     background: var(--bg-overlay-light);
     color: var(--text-link-light);
+    box-shadow: 0 4px 8px rgba(9, 105, 218, 0.1);
 }
 
 body.light-mode .nav-link.active {
     background: linear-gradient(135deg, rgba(9, 105, 218, 0.15) 0%, rgba(5, 80, 174, 0.15) 100%);
     color: var(--text-link-light);
     border-color: var(--text-link-light);
-    box-shadow: 0 0 12px rgba(9, 105, 218, 0.2);
+    box-shadow: 0 0 16px rgba(9, 105, 218, 0.2), 0 2px 8px rgba(9, 105, 218, 0.08);
 }
 
 .section-header {
@@ -607,9 +615,9 @@ body.light-mode .exp-tech-stack {
 }
 
 body.light-mode .exp-tech-badge {
-    background: var(--bg-overlay-light);
-    border-color: var(--border-muted-light);
-    color: var(--text-secondary-light);
+    background: #e8eaed;
+    border-color: #c1c6cc;
+    color: #5f6368;
 }
 
 /* Education Section */
