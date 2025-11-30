@@ -598,18 +598,18 @@ body.light-mode .exp-tech-stack {
 .exp-tech-badge {
     display: inline-block;
     padding: 4px 10px;
-    background: var(--bg-overlay);
-    border: 1px solid var(--text-link);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-muted);
     border-radius: 12px;
     font-size: 12px;
-    color: var(--text-link);
+    color: var(--text-secondary);
     white-space: nowrap;
 }
 
 body.light-mode .exp-tech-badge {
-    background: rgba(9, 105, 218, 0.1);
-    border-color: var(--text-link-light);
-    color: var(--text-link-light);
+    background: var(--bg-overlay-light);
+    border-color: var(--border-muted-light);
+    color: var(--text-secondary-light);
 }
 
 /* Education Section */
