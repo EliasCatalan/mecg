@@ -10,59 +10,13 @@ const yearsOfExperience = currentYear - startYear;
 document.getElementById('years-experience').textContent = yearsOfExperience;
 
 // ============================================
-// THEME TOGGLE
+// THEME TOGGLE (disabled - dark mode only)
 // ============================================
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
+// Forzar dark mode y limpiar preferencia guardada
+localStorage.removeItem('theme');
+document.body.classList.add('dark-mode');
+document.body.classList.remove('light-mode');
 
-// Verificar preferencia guardada
-const savedTheme = localStorage.getItem('theme');
-
-// Aplicar tema inicial - por defecto modo oscuro
-if (savedTheme) {
-    if (savedTheme === 'light') {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        updateThemeButton(false);
-    } else {
-        body.classList.add('dark-mode');
-        body.classList.remove('light-mode');
-        updateThemeButton(true);
-    }
-} else {
-    // Modo oscuro por defecto
-    body.classList.add('dark-mode');
-    body.classList.remove('light-mode');
-    updateThemeButton(true);
-}
-
-// Toggle theme on button click
-themeToggle.addEventListener('click', function() {
-    const isDark = body.classList.contains('dark-mode');
-    
-    if (isDark) {
-        body.classList.remove('dark-mode');
-        body.classList.add('light-mode');
-        localStorage.setItem('theme', 'light');
-        updateThemeButton(false);
-    } else {
-        body.classList.remove('light-mode');
-        body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
-        updateThemeButton(true);
-    }
-});
-
-function updateThemeButton(isDark) {
-    const icon = themeToggle.querySelector('.theme-icon');
-    if (isDark) {
-        icon.textContent = '☀️';
-        themeToggle.setAttribute('aria-label', 'Cambiar a modo claro');
-    } else {
-        icon.textContent = '🌙';
-        themeToggle.setAttribute('aria-label', 'Cambiar a modo oscuro');
-    }
-}
 
 // ============================================
 // CURRENT TIME UPDATE

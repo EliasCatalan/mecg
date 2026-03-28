@@ -175,16 +175,7 @@ body.light-mode .profile-bio {
 }
 
 .btn-theme-toggle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-default);
-    border-radius: 6px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s ease;
+    display: none;
 }
 
 .btn-theme-toggle:hover {
@@ -403,29 +394,45 @@ body.light-mode .nav-link.active {
 
 .section-header {
     margin-bottom: 24px;
-    padding: 14px 16px 14px 20px;
-    background: linear-gradient(90deg, var(--accent-yellow-subtle) 0%, transparent 100%);
-    border-left: 4px solid var(--accent-yellow);
-    border-radius: 0 8px 8px 0;
+    padding: 0 0 16px 0;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(88, 166, 255, 0.2) 0%, transparent 100%);
 }
 
 .section-header h2 {
-    font-size: 22px;
+    font-size: 13px;
     font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: 0.01em;
-    line-height: 1.3;
+    color: #58a6ff;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     margin: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(88, 166, 255, 0.08);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+    border-radius: 20px;
 }
 
-body.light-mode .section-header {
-    background: linear-gradient(90deg, rgba(120, 88, 0, 0.07) 0%, transparent 100%);
-    border-left-color: #7a5800;
+body.light-mode .section-header::after {
+    background: linear-gradient(90deg, rgba(120, 88, 0, 0.15) 0%, transparent 100%);
 }
 
 body.light-mode .section-header h2 {
-    color: var(--text-primary-light);
+    color: #7a5800;
+    background: rgba(120, 88, 0, 0.08);
+    border-color: rgba(120, 88, 0, 0.25);
 }
 
 /* README Section */
@@ -573,15 +580,26 @@ body.light-mode .experience-card {
     border-color: var(--border-default-light);
 }
 
+.exp-header {
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--accent-yellow-subtle);
+}
+
 .exp-header h3 {
     font-size: 18px;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 700;
+    color: var(--accent-yellow);
     margin-bottom: 4px;
+    letter-spacing: 0.01em;
 }
 
 body.light-mode .exp-header h3 {
-    color: var(--text-primary-light);
+    color: #7a5800;
+}
+
+body.light-mode .exp-header {
+    border-bottom-color: rgba(120, 88, 0, 0.15);
 }
 
 .company {
@@ -689,13 +707,14 @@ body.light-mode .education-item {
 
 .edu-content h4 {
     font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 700;
+    color: var(--accent-yellow);
     margin-bottom: 4px;
+    letter-spacing: 0.01em;
 }
 
 body.light-mode .edu-content h4 {
-    color: var(--text-primary-light);
+    color: #7a5800;
 }
 
 .edu-institution {
@@ -746,8 +765,8 @@ body.light-mode .edu-date {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #58a6ff 0%, #1f6feb 100%);
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-yellow) 0%, var(--accent-yellow-dark) 100%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -759,8 +778,8 @@ body.light-mode .edu-date {
 
 .project-card:hover {
     transform: translateY(-4px);
-    border-color: var(--text-link);
-    box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
+    border-color: rgba(240, 192, 64, 0.45);
+    box-shadow: 0 8px 28px var(--accent-yellow-glow);
 }
 
 body.light-mode .project-card {
@@ -769,21 +788,23 @@ body.light-mode .project-card {
 }
 
 body.light-mode .project-card::before {
-    background: linear-gradient(90deg, #0969da 0%, #0550ae 100%);
+    background: linear-gradient(90deg, #7a5800 0%, #c89a10 100%);
 }
 
 body.light-mode .project-card:hover {
-    border-color: var(--text-link-light);
-    box-shadow: 0 8px 24px rgba(9, 105, 218, 0.15);
+    border-color: rgba(120, 88, 0, 0.4);
+    box-shadow: 0 8px 28px rgba(120, 88, 0, 0.15);
 }
 
 .project-card h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--accent-yellow-subtle);
 }
 
 .project-card h3::before {
@@ -792,10 +813,14 @@ body.light-mode .project-card:hover {
 }
 
 .project-card h3 a {
-    color: var(--text-link);
+    color: var(--accent-yellow);
     text-decoration: none;
     transition: color 0.2s ease;
     position: relative;
+}
+
+body.light-mode .project-card h3 a {
+    color: #7a5800;
 }
 
 .project-card h3 a::after {
@@ -1022,7 +1047,7 @@ body.light-mode .scroll-to-top:hover {
     }
     
     .section-header h2 {
-        font-size: 18px;
+        font-size: 11px;
     }
     
     .readme-content {
