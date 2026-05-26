@@ -2,12 +2,18 @@
 // CURRENT YEAR & EXPERIENCE
 // ============================================
 const currentYear = new Date().getFullYear();
-document.getElementById('current-year').textContent = currentYear;
+const currentYearElement = document.getElementById('current-year');
+if (currentYearElement) {
+    currentYearElement.textContent = currentYear;
+}
 
 // Calcular años de experiencia desde 2015
 const startYear = 2015;
 const yearsOfExperience = currentYear - startYear;
-document.getElementById('years-experience').textContent = yearsOfExperience;
+const yearsOfExperienceElement = document.getElementById('years-experience');
+if (yearsOfExperienceElement) {
+    yearsOfExperienceElement.textContent = yearsOfExperience;
+}
 
 // ============================================
 // THEME TOGGLE (disabled - dark mode only)
@@ -38,17 +44,35 @@ setInterval(updateCurrentTime, 60000);
 // ============================================
 // SMOOTH SCROLL
 // ============================================
+function setActiveNavLink(targetHash) {
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === targetHash);
+    });
+}
+
+function isValidSectionHash(hash) {
+    return Boolean(hash) && hash !== '#' && document.querySelector(hash);
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         if (href !== '#' && href !== '') {
             e.preventDefault();
+
+            if (this.classList.contains('nav-link')) {
+                setActiveNavLink(href);
+            }
+
             const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
+
+                // Mantener la URL sincronizada con la sección seleccionada.
+                history.replaceState(null, '', href);
             }
         }
     });
@@ -82,14 +106,13 @@ const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section[id]');
 
 function updateActiveNavLink() {
-    let currentSection = '';
-    const scrollPosition = window.scrollY + 100;
+    let currentSection = sections[0]?.getAttribute('id') || '';
+    const activationOffset = 130;
 
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if (sectionTop - activationOffset <= 0) {
             currentSection = section.getAttribute('id');
         }
     });
@@ -108,27 +131,36 @@ window.addEventListener('scroll', updateActiveNavLink);
 // Actualizar al cargar la página
 window.addEventListener('load', updateActiveNavLink);
 
+// Respetar hash inicial (ej: abrir directo en #projects)
+window.addEventListener('load', () => {
+    if (isValidSectionHash(window.location.hash)) {
+        setActiveNavLink(window.location.hash);
+    }
+});
+
 // ============================================
 // SCROLL TO TOP BUTTON
 // ============================================
 const scrollToTopBtn = document.getElementById('scroll-to-top');
 
-// Mostrar/ocultar botón según scroll
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
-    }
-});
-
-// Scroll suave al inicio
-scrollToTopBtn.addEventListener('click', function() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (scrollToTopBtn) {
+    // Mostrar/ocultar botón según scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
     });
-});
+
+    // Scroll suave al inicio
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
 // ============================================
 // CONSOLE MESSAGE
