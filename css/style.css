@@ -439,7 +439,7 @@ body.light-mode .readme-content {
 }
 
 .lead-text {
-    text-align: left;
+    text-align: justify;
     color: var(--text-primary);
     max-width: 80ch;
 }
@@ -614,6 +614,7 @@ body.light-mode .exp-date {
     margin-bottom: 8px;
     color: var(--text-primary);
     line-height: 1.6;
+    text-align: justify;
 }
 
 body.light-mode .exp-details li {
@@ -829,6 +830,7 @@ body.light-mode .project-card h3 a {
     font-weight: 500;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--border-muted);
+    text-align: justify;
 }
 
 body.light-mode .project-description {
@@ -849,6 +851,7 @@ body.light-mode .project-description {
     padding-left: 24px;
     position: relative;
     line-height: 1.5;
+    text-align: justify;
 }
 
 .project-features li::before {
