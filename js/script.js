@@ -18,8 +18,7 @@ if (yearsOfExperienceElement) {
 // ============================================
 // THEME TOGGLE (disabled - dark mode only)
 // ============================================
-// Forzar dark mode y limpiar preferencia guardada
-localStorage.removeItem('theme');
+// Forzar dark mode
 document.body.classList.add('dark-mode');
 document.body.classList.remove('light-mode');
 
@@ -75,20 +74,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 history.replaceState(null, '', href);
             }
         }
-    });
-});
-
-// ============================================
-// CARD HOVER EFFECTS
-// ============================================
-const cards = document.querySelectorAll('.project-card, .experience-card');
-cards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
     });
 });
 

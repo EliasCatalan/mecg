@@ -174,25 +174,6 @@ body.light-mode .profile-bio {
     color: var(--text-primary-light);
 }
 
-.btn-theme-toggle {
-    display: none;
-}
-
-.btn-theme-toggle:hover {
-    background: var(--bg-overlay);
-    border-color: var(--text-secondary);
-}
-
-body.light-mode .btn-theme-toggle {
-    background: var(--bg-overlay-light);
-    border-color: var(--border-default-light);
-}
-
-body.light-mode .btn-theme-toggle:hover {
-    background: var(--bg-secondary-light);
-    border-color: var(--border-muted-light);
-}
-
 .profile-details {
     margin-top: 16px;
 }
@@ -458,8 +439,9 @@ body.light-mode .readme-content {
 }
 
 .lead-text {
-    text-align: justify;
+    text-align: left;
     color: var(--text-primary);
+    max-width: 80ch;
 }
 
 body.light-mode .lead-text {
