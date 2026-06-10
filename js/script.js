@@ -151,6 +151,5 @@ if (scrollToTopBtn) {
 // CONSOLE MESSAGE
 // ============================================
 console.log('%c👨‍💻 Elias Catalán García', 'font-size: 20px; font-weight: bold; color: #58a6ff;');
-console.log('%cFull-Stack Developer con +10 años de experiencia', 'font-size: 14px; color: #8b949e;');
 console.log('%c🔗 GitHub: https://github.com/EliasCatalan', 'font-size: 12px; color: #58a6ff;');
 console.log('%c📧 Email: ecatalan.code@gmail.com', 'font-size: 12px; color: #58a6ff;');
