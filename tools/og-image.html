@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+  Plantilla de la imagen Open Graph (1200x630).
+  Para regenerar img/og-image.png desde la raíz del proyecto (PowerShell):
+    & "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe" --headless=new --disable-gpu --hide-scrollbars `
+      --window-size=1200,630 --virtual-time-budget=5000 --screenshot="$PWD\img\og-image.png" "$PWD\tools\og-image.html"
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        background: #0d1117;
+        background-image:
+            radial-gradient(circle at 88% 12%, rgba(240, 192, 64, 0.16) 0%, transparent 45%),
+            radial-gradient(circle at 8% 100%, rgba(88, 166, 255, 0.12) 0%, transparent 45%);
+        color: #c9d1d9;
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 64px;
+        padding: 72px 80px 56px;
+        border-top: 8px solid #f0c040;
+    }
+    .top { display: flex; align-items: center; gap: 56px; }
+    .avatar {
+        width: 220px; height: 220px; border-radius: 50%;
+        border: 4px solid rgba(240, 192, 64, 0.6);
+        box-shadow: 0 0 60px rgba(240, 192, 64, 0.25);
+        flex-shrink: 0;
+    }
+    .tag {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 24px; color: #58a6ff; margin-bottom: 12px;
+    }
+    h1 { font-size: 72px; font-weight: 800; color: #f0f6fc; line-height: 1.05; letter-spacing: -0.02em; }
+    .role { font-size: 34px; font-weight: 600; color: #f0c040; margin-top: 10px; }
+    .pitch { font-size: 28px; color: #c9d1d9; margin-top: 20px; line-height: 1.35; max-width: 760px; }
+    .bottom { position: absolute; right: 80px; bottom: 48px; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: #8b949e; }
+</style>
+</head>
+<body>
+    <div class="top">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/13459196?v=4" alt="">
+        <div>
+            <p class="tag">// portfolio</p>
+            <h1>Elias Catalán García</h1>
+            <p class="role">Full-Stack Developer</p>
+            <p class="pitch">Sector público · Transporte · Construcción</p>
+        </div>
+    </div>
+    <div class="bottom">
+        <span class="url">mecg.vercel.app</span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--
+  Plantilla del CV en PDF (A4). El contenido se mantiene a mano en sincronía con index.html.
+  Para regenerar cv/Elias-Catalan-Garcia-CV.pdf desde la raíz del proyecto (PowerShell):
+    & "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe" --headless=new --disable-gpu `
+      --user-data-dir="$env:TEMP\cv-edge-profile" --no-pdf-header-footer --virtual-time-budget=8000 `
+      --print-to-pdf="$PWD\cv\Elias-Catalan-Garcia-CV.pdf" "$PWD\tools\cv.html"
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Elias Catalán García - CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+    @page { size: A4; margin: 12mm 14mm 11mm; }
+
+    :root {
+        --ink: #1f2328;
+        --ink-soft: #3d444d;
+        --muted: #636c76;
+        --accent: #9a6b00;
+        --accent-strong: #f0c040;
+        --accent-tint: #fdf5dc;
+        --rule: #e1e4e8;
+        --chip-bg: #f3f5f7;
+        --chip-border: #e1e5ea;
+        --link: #0b62c4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        font-size: 9pt;
+        line-height: 1.42;
+        color: var(--ink-soft);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    strong { color: var(--ink); }
+
+    /* ---------- Encabezado ---------- */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        border-bottom: 3px solid var(--accent-strong);
+    }
+    h1 {
+        font-size: 25pt;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        color: var(--ink);
+    }
+    .role {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 11pt;
+        font-weight: 600;
+        color: var(--accent);
+    }
+    .contact { list-style: none; font-size: 8.4pt; text-align: right; }
+    .contact li { display: flex; align-items: center; justify-content: flex-end; gap: 6px; line-height: 1.6; }
+    .contact svg { width: 10px; height: 10px; fill: var(--accent); flex-shrink: 0; }
+    .contact a, .contact span { color: var(--ink-soft); }
+
+    /* ---------- Secciones ---------- */
+    section { margin-bottom: 12px; }
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 9pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--ink);
+        margin-bottom: 8px;
+        break-after: avoid;
+    }
+    h2::before {
+        content: "";
+        width: 4px;
+        height: 12px;
+        border-radius: 2px;
+        background: var(--accent-strong);
+    }
+    h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--rule);
+    }
+
+    .summary { font-size: 9.3pt; line-height: 1.5; color: var(--ink-soft); }
+
+    /* ---------- Chips (texto real, legible por ATS) ---------- */
+    .chips { display: flex; flex-wrap: wrap; gap: 3px 4px; }
+    .chip {
+        display: inline-block;
+        padding: 0 6px;
+        font-size: 7.9pt;
+        line-height: 1.6;
+        color: var(--ink-soft);
+        background: var(--chip-bg);
+        border: 1px solid var(--chip-border);
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+
+    /* ---------- Habilidades ---------- */
+    .skills { display: grid; grid-template-columns: 142px 1fr; row-gap: 4px; align-items: start; }
+    .skills dt { font-weight: 600; color: var(--ink); font-size: 8.6pt; padding-top: 1px; }
+
+    /* ---------- Experiencia (línea de tiempo) ---------- */
+    .timeline { border-left: 2px solid #d3d8de; margin-left: 4px; padding-left: 14px; }
+    .job { position: relative; margin-bottom: 10px; break-inside: avoid; }
+    .job:last-child { margin-bottom: 0; }
+    .job::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--accent-strong);
+    }
+    .job.current::before { background: var(--accent-strong); }
+    .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+    .job-title { font-size: 10.3pt; font-weight: 700; color: var(--ink); }
+    .job-company { font-weight: 600; color: var(--accent); }
+    .job-meta { color: var(--muted); font-size: 8.5pt; margin: 1px 0 4px; }
+    .date {
+        flex-shrink: 0;
+        font-size: 8pt;
+        font-weight: 500;
+        color: var(--muted);
+        white-space: nowrap;
+    }
+    .job.current .date {
+        color: var(--accent);
+        background: var(--accent-tint);
+        padding: 0 7px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+    ul { padding-left: 13px; }
+    li { margin-bottom: 1.5px; }
+    li::marker { color: var(--accent); font-size: 0.85em; }
+    .job .chips { margin-top: 5px; }
+
+    /* ---------- Proyectos ---------- */
+    .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .project {
+        border: 1px solid var(--rule);
+        border-top: 2px solid var(--accent-strong);
+        border-radius: 5px;
+        padding: 6px 9px 7px;
+        break-inside: avoid;
+    }
+    .project-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+    .project-name { font-weight: 700; color: var(--ink); font-size: 9.3pt; }
+    .project-name small { font-weight: 500; color: var(--muted); font-size: 8pt; }
+    .project a { font-size: 7.8pt; white-space: nowrap; }
+    .project p { font-size: 8.4pt; line-height: 1.4; }
+
+    /* ---------- Educación y certificaciones ---------- */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; break-inside: avoid; }
+    .two-col section { margin-bottom: 0; }
+    .edu-title { font-weight: 700; color: var(--ink); }
+    .edu-inst { color: var(--ink-soft); }
+    .edu-date { color: var(--muted); font-size: 8.3pt; }
+</style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>Elias Catalán García</h1>
+        <p class="role">Full-Stack Developer</p>
+    </div>
+    <ul class="contact">
+        <li><span>Santiago, Chile</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193ZM8 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></li>
+        <li><a href="mailto:ecatalan.code@gmail.com">ecatalan.code@gmail.com</a>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 5.809v6.442c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0Zm13-1.739v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg></li>
+        <li><a href="https://www.linkedin.com/in/ecatalan">linkedin.com/in/ecatalan</a>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.739 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 4.892v4.892zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></li>
+        <li><a href="https://github.com/EliasCatalan">github.com/EliasCatalan</a>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></li>
+        <li><a href="https://mecg.vercel.app/">mecg.vercel.app</a>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.78 8.75a9.64 9.64 0 0 0 1.363 4.177c.255.426.542.832.857 1.215.245-.296.551-.705.857-1.215A9.64 9.64 0 0 0 10.22 8.75Zm4.44-1.5a9.64 9.64 0 0 0-1.363-4.177c-.307-.51-.612-.919-.857-1.215a9.927 9.927 0 0 0-.857 1.215A9.64 9.64 0 0 0 5.78 7.25Zm-5.944 1.5H1.543a6.507 6.507 0 0 0 4.666 5.5c-.123-.181-.24-.365-.352-.552-.715-1.192-1.437-2.874-1.581-4.948Zm-2.733-1.5h2.733c.144-2.074.866-3.756 1.58-4.948.12-.197.237-.381.353-.552a6.507 6.507 0 0 0-4.666 5.5Zm10.181 1.5c-.144 2.074-.866 3.756-1.58 4.948-.12.197-.237.381-.353.552a6.507 6.507 0 0 0 4.666-5.5Zm2.733-1.5a6.507 6.507 0 0 0-4.666-5.5c.123.181.24.365.353.552.714 1.192 1.436 2.874 1.58 4.948Z"/></svg></li>
+    </ul>
+</header>
+
+<section>
+    <h2>Perfil</h2>
+    <p class="summary">
+        Desarrollador Full-Stack con <strong>más de 11 años</strong> construyendo sistemas críticos en Chile, desde plataformas públicas de
+        alcance nacional, como el sistema de postulación de Fundación Integra, hasta software de gestión para transporte y construcción.
+        Me especializo en <strong>llevar sistemas a producción y mantenerlos estables</strong>: integraciones con servicios externos
+        (facturación electrónica, AS400, GPS), aplicaciones bajo alta demanda y modernización de código heredado, incluido código generado
+        con IA. He liderado equipos y mentoreado a desarrolladores nuevos.
+    </p>
+</section>
+
+<section>
+    <h2>Habilidades técnicas</h2>
+    <dl class="skills">
+        <dt>Backend</dt>
+        <dd class="chips"><span class="chip">PHP</span> <span class="chip">CodeIgniter 4</span> <span class="chip">Node.js</span> <span class="chip">NestJS</span> <span class="chip">Express</span> <span class="chip">Laravel</span></dd>
+        <dt>Frontend</dt>
+        <dd class="chips"><span class="chip">JavaScript (ES6)</span> <span class="chip">TypeScript</span> <span class="chip">Angular</span> <span class="chip">Ionic</span> <span class="chip">React</span> <span class="chip">Next.js</span> <span class="chip">jQuery</span> <span class="chip">Bootstrap</span> <span class="chip">DataTables</span></dd>
+        <dt>Bases de datos</dt>
+        <dd class="chips"><span class="chip">MySQL</span> <span class="chip">PostgreSQL</span> <span class="chip">SQL Server</span> <span class="chip">MongoDB</span></dd>
+        <dt>DevOps / Herramientas</dt>
+        <dd class="chips"><span class="chip">Git</span> <span class="chip">GitHub</span> <span class="chip">GitLab</span> <span class="chip">Jenkins</span> <span class="chip">CI/CD</span> <span class="chip">Docker</span> <span class="chip">AWS</span></dd>
+        <dt>Desarrollo con IA</dt>
+        <dd class="chips"><span class="chip">GitHub Copilot</span> <span class="chip">Claude</span> <span class="chip">Opencode</span> <span class="chip">Prompt Engineering</span></dd>
+        <dt>Metodologías</dt>
+        <dd class="chips"><span class="chip">Scrum</span> <span class="chip">Agile</span></dd>
+    </dl>
+</section>
+
+<section>
+    <h2>Experiencia laboral</h2>
+    <div class="timeline">
+
+        <div class="job current">
+            <div class="job-head">
+                <p><span class="job-title">Full-Stack Developer</span> · <span class="job-company">Aboservicios SPA</span></p>
+                <span class="date">Mayo 2024 – Presente</span>
+            </div>
+            <p class="job-meta">Santiago, Chile</p>
+            <ul>
+                <li>Análisis y levantamiento de requerimientos directamente con usuarios, participando en la definición de alcances, procesos y evaluación de implicancias técnicas.</li>
+                <li>Desarrollo de módulos nuevos y modificación de funcionalidades existentes, adaptando el sistema a los procesos operacionales y necesidades del negocio.</li>
+                <li>Desarrollo e integración de servicios externos mediante APIs, incluyendo facturación electrónica DTE, posicionamiento de flota y reportería.</li>
+                <li>Implementación de funcionalidades de posicionamiento vehicular, informes, reportería y visualización de flota en mapas.</li>
+                <li>Desarrollo de automatizaciones para alertas y notificaciones asociadas a eventos relevantes del negocio.</li>
+            </ul>
+            <div class="chips"><span class="chip">PHP</span> <span class="chip">CodeIgniter 4</span> <span class="chip">JavaScript (ES6)</span> <span class="chip">Ionic</span> <span class="chip">Angular</span> <span class="chip">MySQL</span> <span class="chip">Bootstrap</span> <span class="chip">Git</span> <span class="chip">jQuery</span> <span class="chip">DataTables</span></div>
+        </div>
+
+        <div class="job">
+            <div class="job-head">
+                <p><span class="job-title">Full-Stack Freelance Developer</span> · <span class="job-company">MIMS Projects</span></p>
+                <span class="date">Mayo 2025 – Mayo 2026</span>
+            </div>
+            <p class="job-meta">Santiago, Chile · Part-time, en paralelo a Aboservicios</p>
+            <ul>
+                <li>Participé en la transformación de Intelligent360 en una suite de siete módulos para la gestión de proyectos EPCM, construida con Next.js, NestJS y AWS, cuya base fue generada con IA.</li>
+                <li>Desarrollé e integré las funcionalidades que la IA no logró resolver, y ajusté y mejoré el código generado hasta llevarlo a un estado apto para producción.</li>
+                <li>Trabajé con flujos de desarrollo asistidos por IA (GitHub Copilot Pro, Claude Sonnet), con revisión crítica y control de calidad del código generado.</li>
+            </ul>
+            <div class="chips"><span class="chip">React</span> <span class="chip">Next.js</span> <span class="chip">TypeScript</span> <span class="chip">Node.js</span> <span class="chip">NestJS</span> <span class="chip">PostgreSQL</span> <span class="chip">AWS</span> <span class="chip">Git</span> <span class="chip">GitHub Copilot</span> <span class="chip">Claude</span></div>
+        </div>
+
+        <div class="job">
+            <div class="job-head">
+                <p><span class="job-title">Full-Stack Developer</span> · <span class="job-company">MIMS Projects</span></p>
+                <span class="date">Marzo 2023 – Mayo 2024</span>
+            </div>
+            <p class="job-meta">Santiago, Chile</p>
+            <ul>
+                <li>Mantuve la versión original de Intelligent360 en PHP, resolviendo incidencias y desarrollando nuevas funcionalidades según las necesidades del negocio.</li>
+                <li>Rediseñé el manejo de procesos asíncronos críticos con Promises en JavaScript y corregí flujos que no finalizaban correctamente o avanzaban a etapas siguientes sin completarse, lo que mejoró la confiabilidad y la integridad de los procesos del sistema.</li>
+            </ul>
+            <div class="chips"><span class="chip">PHP</span> <span class="chip">CodeIgniter 4</span> <span class="chip">Git</span> <span class="chip">PostgreSQL</span></div>
+        </div>
+
+        <div class="job">
+            <div class="job-head">
+                <p><span class="job-title">Full-Stack Developer</span> · <span class="job-company">Fundación Integra / Procesac S.A.</span></p>
+                <span class="date">Marzo 2015 – Marzo 2023</span>
+            </div>
+            <p class="job-meta">Santiago, Chile</p>
+            <ul>
+                <li>Lideré un equipo de desarrollo para crear una aplicación web que permite gestionar reuniones y planificaciones en jardines infantiles, optimizando procesos administrativos y mejorando la organización institucional.</li>
+                <li>Lideré la integración y puesta en marcha del servicio Queue-it para gestionar el tráfico durante las aperturas de postulaciones a jardines infantiles y salas cuna, asegurando la estabilidad y accesibilidad del sistema bajo alta demanda.</li>
+                <li>Diseñé y desarrollé proyectos a medida, adaptados a las necesidades específicas de los clientes, asegurando soluciones funcionales y escalables.</li>
+                <li>Guié a nuevos desarrolladores a través de mentorías, ayudándolos a mejorar sus habilidades técnicas y a integrarse de manera efectiva en el equipo de desarrollo.</li>
+                <li>Implementé renovaciones tecnológicas mediante el uso de frameworks y librerías como CodeIgniter, Bootstrap y jQuery, mejorando la calidad del código y la experiencia del usuario.</li>
+                <li>Trabajé en estrecha colaboración con desarrolladores y diseñadores en entornos ágiles, aplicando metodologías como Scrum y Agile para garantizar entregas eficientes y de alta calidad.</li>
+            </ul>
+            <div class="chips"><span class="chip">PHP</span> <span class="chip">CodeIgniter 4</span> <span class="chip">JavaScript (ES6)</span> <span class="chip">jQuery</span> <span class="chip">Bootstrap</span> <span class="chip">DataTables</span> <span class="chip">MySQL</span> <span class="chip">SQL Server</span> <span class="chip">Git</span> <span class="chip">Jenkins</span> <span class="chip">Docker</span> <span class="chip">CI/CD</span></div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <h2>Proyectos destacados</h2>
+    <div class="projects">
+        <div class="project">
+            <div class="project-head">
+                <span class="project-name">FUSION <small>· TMS</small></span>
+                <a href="https://fusion.deltainformatica.cl/">fusion.deltainformatica.cl</a>
+            </div>
+            <p>Gestión integrada de transporte: ingreso, centralización y reportería de guías; emisión de DTE vía API SimpleFactura (facturas afectas y exentas, notas de crédito y débito) con exportación de detalle y timbre electrónico.</p>
+        </div>
+
+        <div class="project">
+            <div class="project-head">
+                <span class="project-name">Intelligent360 <small>· EPCM</small></span>
+                <a href="https://intelligent360.cl/">intelligent360.cl</a>
+            </div>
+            <p>Suite de siete módulos para proyectos EPCM: Konsigna (contratos), Trackin (tráfico y logística), EPCStock (bodega), Construc+ (construcción), PMControl (planificación), Valipass (acreditación) y Arkivo (control de proyectos).</p>
+        </div>
+
+        <div class="project">
+            <div class="project-head">
+                <span class="project-name">POSTULA <small>· Fundación Integra</small></span>
+                <a href="https://postula.integra.cl/">postula.integra.cl</a>
+            </div>
+            <p>Postulación nacional a jardines infantiles y salas cuna: encuesta de puntajes y vulnerabilidad (RSH), búsqueda nacional de establecimientos, integración con AS400 y notificaciones de cada etapa.</p>
+        </div>
+
+        <div class="project">
+            <div class="project-head">
+                <span class="project-name">CONFIRMA <small>· Fundación Integra</small></span>
+                <a href="https://confirma.integra.cl/">confirma.integra.cl</a>
+            </div>
+            <p>Confirmación y asignación de cupos en jardines infantiles y salas cuna del país, con gestión de niños y niñas por nivel y envío masivo de información hacia AS400.</p>
+        </div>
+
+        <div class="project">
+            <div class="project-head">
+                <span class="project-name">ASI <small>· Fundación Integra</small></span>
+                <a href="https://asi.integra.cl/">asi.integra.cl</a>
+            </div>
+            <p>Oficina de Informaciones, Reclamos y Sugerencias (OIRS) interna y para la comunidad: control de tiempos de respuesta (SLA), notificaciones de derivación y trazabilidad de requerimientos.</p>
+        </div>
+    </div>
+</section>
+
+<div class="two-col">
+    <section>
+        <h2>Educación</h2>
+        <p class="edu-title">Ingeniería en Computación e Informática</p>
+        <p class="edu-inst">Instituto Profesional La Araucana · Santiago, Chile</p>
+        <p class="edu-date">Marzo 2011 – Diciembre 2015</p>
+    </section>
+    <section>
+        <h2>Certificaciones</h2>
+        <p class="edu-title">Scrum Foundation Certificate (SFC)</p>
+        <p class="edu-inst">CertiProf · ID: 43247919</p>
+        <p class="edu-date">Agosto 2020</p>
+    </section>
+</div>
+
+</body>
+</html>

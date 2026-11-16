@@ -2,6 +2,9 @@
    GITHUB STYLE - VARIABLES
    ============================================ */
 :root {
+    /* El sitio es solo oscuro: el navegador adapta scrollbars y fondo inicial */
+    color-scheme: dark;
+
     /* Dark Theme Colors */
     --bg-primary: #0d1117;
     --bg-secondary: #161b22;
@@ -15,20 +18,6 @@
     
     --border-default: #30363d;
     --border-muted: #21262d;
-    
-    /* Light Theme Colors */
-    --bg-primary-light: #ffffff;
-    --bg-secondary-light: #f6f8fa;
-    --bg-tertiary-light: #ffffff;
-    --bg-overlay-light: #f6f8fa;
-    
-    --text-primary-light: #24292f;
-    --text-secondary-light: #57606a;
-    --text-link-light: #0969da;
-    --text-link-hover-light: #0550ae;
-    
-    --border-default-light: #d0d7de;
-    --border-muted-light: #d8dee4;
     
     /* Common */
     --font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
@@ -56,12 +45,30 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.light-mode {
-    background-color: var(--bg-primary-light);
-    color: var(--text-primary-light);
+/* Evita que la navegación sticky tape el título al saltar a una sección */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* Las secciones reciben foco desde la navegación (tabindex="-1"), pero no son
+   interactivas: no necesitan anillo de foco */
+section[id]:focus {
+    outline: none;
+}
+
+/* Respetar a usuarios que prefieren menos animación: se anulan solo los
+   desplazamientos; las transiciones de color se mantienen */
+@media (prefers-reduced-motion: reduce) {
+    .cv-download:hover,
+    .nav-link:hover,
+    .tech-badge:hover,
+    .project-card:hover,
+    .scroll-to-top:hover,
+    .scroll-to-top:active {
+        transform: none;
+    }
 }
 
 a {
@@ -75,24 +82,12 @@ a:hover {
     text-decoration: underline;
 }
 
-body.light-mode a {
-    color: var(--text-link-light);
-}
-
-body.light-mode a:hover {
-    color: var(--text-link-hover-light);
-}
-
 code {
     background-color: var(--bg-tertiary);
     padding: 0.2em 0.4em;
     border-radius: 6px;
     font-family: var(--font-mono);
     font-size: 0.9em;
-}
-
-body.light-mode code {
-    background-color: var(--bg-overlay-light);
 }
 
 /* ============================================
@@ -133,10 +128,6 @@ body.light-mode code {
     border: 1px solid var(--border-default);
 }
 
-body.light-mode .avatar-img {
-    border-color: var(--border-default-light);
-}
-
 .profile-info {
     margin-bottom: 8px;
 }
@@ -148,30 +139,11 @@ body.light-mode .avatar-img {
     color: var(--text-primary);
 }
 
-body.light-mode .profile-name {
-    color: var(--text-primary-light);
-}
-
-.profile-username {
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--text-secondary);
-    margin-top: 4px;
-}
-
-body.light-mode .profile-username {
-    color: var(--text-secondary-light);
-}
-
 .profile-bio {
     font-size: 14px;
     color: var(--text-primary);
     margin-top: 8px;
     line-height: 1.5;
-}
-
-body.light-mode .profile-bio {
-    color: var(--text-primary-light);
 }
 
 .profile-details {
@@ -187,67 +159,49 @@ body.light-mode .profile-bio {
     color: var(--text-primary);
 }
 
-body.light-mode .detail-item {
-    color: var(--text-primary-light);
-}
-
 .detail-item .icon {
     fill: var(--text-secondary);
     flex-shrink: 0;
 }
 
-body.light-mode .detail-item .icon {
-    fill: var(--text-secondary-light);
-}
-
-.achievements {
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-default);
-}
-
-body.light-mode .achievements {
-    border-color: var(--border-default-light);
-}
-
-.achievements h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--text-primary);
-}
-
-body.light-mode .achievements h3 {
-    color: var(--text-primary-light);
-}
-
-.achievement-badges {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.badge {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border-default);
+/* Botón de descarga del CV */
+.cv-download {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 9px 16px;
+    border: 1px solid rgba(240, 192, 64, 0.45);
+    border-radius: 8px;
+    background: var(--accent-yellow-subtle);
+    color: var(--accent-yellow);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.badge:hover {
-    transform: scale(1.1);
+.cv-download svg {
+    fill: currentColor;
+    flex-shrink: 0;
 }
 
-body.light-mode .badge {
-    background: var(--bg-overlay-light);
-    border-color: var(--border-default-light);
+.cv-download:hover {
+    color: var(--accent-yellow);
+    text-decoration: none;
+    background: rgba(240, 192, 64, 0.2);
+    box-shadow: 0 4px 12px var(--accent-yellow-glow);
+    transform: translateY(-1px);
+}
+
+.cv-download:focus-visible {
+    outline: 2px solid var(--accent-yellow);
+    outline-offset: 2px;
+}
+
+.cv-download-meta {
+    font-weight: 400;
+    color: var(--text-secondary);
 }
 
 /* ============================================
@@ -255,10 +209,6 @@ body.light-mode .badge {
    ============================================ */
 .main-content {
     min-width: 0;
-}
-
-.profile-header-mobile {
-    display: none;
 }
 
 /* Navigation Menu */
@@ -276,12 +226,6 @@ body.light-mode .badge {
     margin-right: -16px;
     margin-top: -16px;
     border-bottom: 2px solid var(--accent-yellow-subtle);
-}
-
-body.light-mode .main-nav {
-    background: rgba(255, 255, 255, 0.97);
-    border-color: var(--accent-yellow-subtle);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 0 var(--accent-yellow-subtle);
 }
 
 .nav-list {
@@ -302,6 +246,7 @@ body.light-mode .main-nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6px;
     width: 100%;
     padding: 10px 8px;
     color: var(--text-secondary);
@@ -351,28 +296,6 @@ body.light-mode .main-nav {
     font-weight: 600;
 }
 
-body.light-mode .nav-link {
-    color: var(--text-secondary-light);
-}
-
-body.light-mode .nav-link::before {
-    background: linear-gradient(90deg, #7a5800 0%, #5c4000 100%);
-}
-
-body.light-mode .nav-link:hover {
-    background: rgba(120, 88, 0, 0.08);
-    color: #7a5800;
-    box-shadow: 0 4px 10px rgba(120, 88, 0, 0.15);
-}
-
-body.light-mode .nav-link.active {
-    background: rgba(120, 88, 0, 0.1);
-    color: #7a5800;
-    border-color: rgba(120, 88, 0, 0.4);
-    box-shadow: 0 0 14px rgba(120, 88, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
-    font-weight: 600;
-}
-
 .section-header {
     margin-bottom: 24px;
     padding: 0 0 16px 0;
@@ -406,22 +329,9 @@ body.light-mode .nav-link.active {
     border-radius: 20px;
 }
 
-body.light-mode .section-header::after {
-    background: linear-gradient(90deg, rgba(120, 88, 0, 0.15) 0%, transparent 100%);
-}
-
-body.light-mode .section-header h2 {
-    color: #7a5800;
-    background: rgba(120, 88, 0, 0.08);
-    border-color: rgba(120, 88, 0, 0.25);
-}
-
 /* README Section */
 .readme-section {
     margin-bottom: 24px;
-}
-
-body.light-mode .readme-section {
 }
 
 .readme-content {
@@ -433,27 +343,15 @@ body.light-mode .readme-section {
     line-height: 1.8;
 }
 
-body.light-mode .readme-content {
-    background: var(--bg-tertiary-light);
-    border-color: var(--border-default-light);
-}
-
 .lead-text {
     text-align: justify;
     color: var(--text-primary);
     max-width: 80ch;
 }
 
-body.light-mode .lead-text {
-    color: var(--text-primary-light);
-}
-
 /* Tech Stack Section */
 .tech-stack-section {
     margin-bottom: 24px;
-}
-
-body.light-mode .tech-stack-section {
 }
 
 .tech-table {
@@ -464,11 +362,6 @@ body.light-mode .tech-stack-section {
     padding: 8px 16px;
 }
 
-body.light-mode .tech-table {
-    background: var(--bg-tertiary-light);
-    border-color: var(--border-default-light);
-}
-
 .tech-table table {
     width: 100%;
     border-collapse: collapse;
@@ -476,10 +369,6 @@ body.light-mode .tech-table {
 
 .tech-table tr {
     border-bottom: 1px solid var(--border-muted);
-}
-
-body.light-mode .tech-table tr {
-    border-color: var(--border-muted-light);
 }
 
 .tech-table tr:last-child {
@@ -496,10 +385,6 @@ body.light-mode .tech-table tr {
     color: var(--text-primary);
     white-space: nowrap;
     width: 200px;
-}
-
-body.light-mode .tech-table .category {
-    color: var(--text-primary-light);
 }
 
 .tech-table .technologies {
@@ -528,22 +413,6 @@ body.light-mode .tech-table .category {
     color: #ffd700;
 }
 
-body.light-mode .tech-badge {
-    background: var(--bg-overlay-light);
-    border-color: var(--border-default-light);
-    color: var(--text-primary-light);
-}
-
-body.light-mode .tech-badge:hover {
-    border-color: #d4af37;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-    color: #d4af37;
-}
-
-.gist-link {
-    font-size: 14px;
-}
-
 /* Experience Section */
 .experience-section {
     margin-bottom: 24px;
@@ -555,11 +424,6 @@ body.light-mode .tech-badge:hover {
     border-radius: 6px;
     padding: 24px;
     margin-bottom: 16px;
-}
-
-body.light-mode .experience-card {
-    background: var(--bg-tertiary-light);
-    border-color: var(--border-default-light);
 }
 
 .exp-header {
@@ -576,14 +440,6 @@ body.light-mode .experience-card {
     letter-spacing: 0.01em;
 }
 
-body.light-mode .exp-header h3 {
-    color: #7a5800;
-}
-
-body.light-mode .exp-header {
-    border-bottom-color: rgba(120, 88, 0, 0.15);
-}
-
 .company {
     font-size: 14px;
     color: var(--text-secondary);
@@ -591,18 +447,10 @@ body.light-mode .exp-header {
     margin-bottom: 8px;
 }
 
-body.light-mode .company {
-    color: var(--text-secondary-light);
-}
-
 .exp-date {
     font-size: 13px;
     color: var(--text-secondary);
     margin-bottom: 12px;
-}
-
-body.light-mode .exp-date {
-    color: var(--text-secondary-light);
 }
 
 .exp-details {
@@ -617,10 +465,6 @@ body.light-mode .exp-date {
     text-align: justify;
 }
 
-body.light-mode .exp-details li {
-    color: var(--text-primary-light);
-}
-
 .exp-tech-stack {
     display: flex;
     flex-wrap: wrap;
@@ -628,10 +472,6 @@ body.light-mode .exp-details li {
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px solid var(--border-muted);
-}
-
-body.light-mode .exp-tech-stack {
-    border-color: var(--border-muted-light);
 }
 
 .exp-tech-badge {
@@ -643,12 +483,6 @@ body.light-mode .exp-tech-stack {
     font-size: 12px;
     color: var(--text-secondary);
     white-space: nowrap;
-}
-
-body.light-mode .exp-tech-badge {
-    background: #e8eaed;
-    border-color: #c1c6cc;
-    color: #5f6368;
 }
 
 /* Education Section */
@@ -663,9 +497,18 @@ body.light-mode .exp-tech-badge {
     padding: 16px;
 }
 
-body.light-mode .education-list {
-    background: var(--bg-tertiary-light);
-    border-color: var(--border-default-light);
+.edu-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    padding: 8px 16px 0;
+}
+
+/* El ítem anterior ya dibuja la línea divisoria con su border-bottom */
+.education-item + .edu-group-title {
+    padding-top: 20px;
 }
 
 .education-item {
@@ -673,10 +516,6 @@ body.light-mode .education-list {
     gap: 16px;
     padding: 16px;
     border-bottom: 1px solid var(--border-muted);
-}
-
-body.light-mode .education-item {
-    border-color: var(--border-muted-light);
 }
 
 .education-item:last-child {
@@ -696,27 +535,15 @@ body.light-mode .education-item {
     letter-spacing: 0.01em;
 }
 
-body.light-mode .edu-content h4 {
-    color: #7a5800;
-}
-
 .edu-institution {
     font-size: 14px;
     color: var(--text-secondary);
     margin-bottom: 4px;
 }
 
-body.light-mode .edu-institution {
-    color: var(--text-secondary-light);
-}
-
 .edu-date {
     font-size: 13px;
     color: var(--text-secondary);
-}
-
-body.light-mode .edu-date {
-    color: var(--text-secondary-light);
 }
 
 /* Projects Section */
@@ -765,20 +592,6 @@ body.light-mode .edu-date {
     box-shadow: 0 8px 28px var(--accent-yellow-glow);
 }
 
-body.light-mode .project-card {
-    background: var(--bg-tertiary-light);
-    border-color: var(--border-default-light);
-}
-
-body.light-mode .project-card::before {
-    background: linear-gradient(90deg, #7a5800 0%, #c89a10 100%);
-}
-
-body.light-mode .project-card:hover {
-    border-color: rgba(120, 88, 0, 0.4);
-    box-shadow: 0 8px 28px rgba(120, 88, 0, 0.15);
-}
-
 .project-card h3 {
     font-size: 18px;
     font-weight: 700;
@@ -802,10 +615,6 @@ body.light-mode .project-card:hover {
     position: relative;
 }
 
-body.light-mode .project-card h3 a {
-    color: #7a5800;
-}
-
 .project-card h3 a::after {
     content: '↗';
     opacity: 0;
@@ -818,10 +627,6 @@ body.light-mode .project-card h3 a {
     opacity: 1;
 }
 
-body.light-mode .project-card h3 a {
-    color: var(--text-link-light);
-}
-
 .project-description {
     font-size: 15px;
     color: var(--text-secondary);
@@ -831,11 +636,6 @@ body.light-mode .project-card h3 a {
     padding-bottom: 12px;
     border-bottom: 1px solid var(--border-muted);
     text-align: justify;
-}
-
-body.light-mode .project-description {
-    color: var(--text-secondary-light);
-    border-color: var(--border-muted-light);
 }
 
 .project-features {
@@ -863,14 +663,6 @@ body.light-mode .project-description {
     font-size: 14px;
 }
 
-body.light-mode .project-features li {
-    color: var(--text-primary-light);
-}
-
-body.light-mode .project-features li::before {
-    color: var(--text-link-light);
-}
-
 /* Footer */
 .github-footer {
     margin-top: 40px;
@@ -879,11 +671,6 @@ body.light-mode .project-features li::before {
     text-align: center;
     color: var(--text-secondary);
     font-size: 12px;
-}
-
-body.light-mode .github-footer {
-    border-color: var(--border-default-light);
-    color: var(--text-secondary-light);
 }
 
 /* Scroll to Top Button */
@@ -924,27 +711,6 @@ body.light-mode .github-footer {
     transform: translateY(-2px);
 }
 
-body.light-mode .scroll-to-top {
-    background: var(--bg-overlay-light);
-    border-color: var(--border-default-light);
-    color: var(--text-link-light);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .scroll-to-top:hover {
-    background: var(--bg-secondary-light);
-    border-color: var(--text-link-light);
-    box-shadow: 0 6px 16px rgba(9, 105, 218, 0.2);
-}
-
-.footer-links {
-    margin-top: 8px;
-}
-
-.footer-links a {
-    margin: 0 8px;
-}
-
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
@@ -958,20 +724,29 @@ body.light-mode .scroll-to-top:hover {
         position: relative;
         top: 0;
     }
-    
-    .profile-header-mobile {
-        display: block;
-        margin-bottom: 24px;
+
+    /* En una sola columna, la foto a ancho completo empujaba todo el contenido */
+    .profile-avatar {
+        width: 160px;
+        margin: 0 auto 16px;
+    }
+
+    /* Foto, nombre y bio centrados */
+    .profile-section {
+        text-align: center;
+    }
+
+    /* Bloque de contacto centrado, con los íconos alineados en columna */
+    .profile-details {
+        width: fit-content;
+        margin: 16px auto 0;
+    }
+
+    .cv-download {
+        width: fit-content;
+        margin: 20px auto 0;
     }
     
-    .profile-header-mobile h1 {
-        font-size: 28px;
-        color: var(--text-primary);
-    }
-    
-    body.light-mode .profile-header-mobile h1 {
-        color: var(--text-primary-light);
-    }
 
     .main-nav {
         margin-left: -16px;
@@ -993,6 +768,12 @@ body.light-mode .scroll-to-top:hover {
 @media (max-width: 768px) {
     .github-container {
         padding: 12px;
+    }
+
+    /* El margen negativo de la nav debe igualar el padding del contenedor */
+    .main-nav {
+        margin-left: -12px;
+        margin-right: -12px;
     }
     
     .readme-section,
@@ -1020,15 +801,16 @@ body.light-mode .scroll-to-top:hover {
     .profile-name {
         font-size: 22px;
     }
-    
-    .profile-username {
-        font-size: 18px;
-    }
 }
 
 @media (max-width: 480px) {
     .github-container {
         padding: 8px;
+    }
+
+    .main-nav {
+        margin-left: -8px;
+        margin-right: -8px;
     }
     
     .section-header h2 {

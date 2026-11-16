@@ -1,127 +1,90 @@
 // ============================================
-// CURRENT YEAR & EXPERIENCE
+// CURRENT YEAR & YEARS OF EXPERIENCE
 // ============================================
 const currentYear = new Date().getFullYear();
+
 const currentYearElement = document.getElementById('current-year');
 if (currentYearElement) {
     currentYearElement.textContent = currentYear;
 }
 
-// Calcular años de experiencia desde 2015
-const startYear = 2015;
-const yearsOfExperience = currentYear - startYear;
-const yearsOfExperienceElement = document.getElementById('years-experience');
-if (yearsOfExperienceElement) {
-    yearsOfExperienceElement.textContent = yearsOfExperience;
-}
-
-// ============================================
-// THEME TOGGLE (disabled - dark mode only)
-// ============================================
-// Forzar dark mode
-document.body.classList.add('dark-mode');
-document.body.classList.remove('light-mode');
-
-
-// ============================================
-// CURRENT TIME UPDATE
-// ============================================
-function updateCurrentTime() {
-    const timeElement = document.getElementById('current-time');
-    if (timeElement) {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        timeElement.textContent = `${hours}:${minutes} (UTC -03:00)`;
+// Años completos de experiencia desde marzo de 2015 (el texto dice "más de X años")
+const yearsExperienceElement = document.getElementById('years-experience');
+if (yearsExperienceElement) {
+    const careerStart = new Date(2015, 2, 1); // meses base 0: 2 = marzo
+    const now = new Date();
+    let years = now.getFullYear() - careerStart.getFullYear();
+    if (now < new Date(now.getFullYear(), careerStart.getMonth(), careerStart.getDate())) {
+        years--;
     }
+    yearsExperienceElement.textContent = years;
 }
 
-// Actualizar tiempo cada minuto
-updateCurrentTime();
-setInterval(updateCurrentTime, 60000);
+// ============================================
+// NAVIGATION: SMOOTH SCROLL + ACTIVE STATE
+// ============================================
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-// ============================================
-// SMOOTH SCROLL
-// ============================================
 function setActiveNavLink(targetHash) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === targetHash);
+    navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === targetHash;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+            link.setAttribute('aria-current', 'location');
+        } else {
+            link.removeAttribute('aria-current');
+        }
     });
-}
-
-function isValidSectionHash(hash) {
-    return Boolean(hash) && hash !== '#' && document.querySelector(hash);
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
-        if (href !== '#' && href !== '') {
-            e.preventDefault();
+        if (!href || href === '#') return;
 
-            if (this.classList.contains('nav-link')) {
-                setActiveNavLink(href);
-            }
+        const target = document.querySelector(href);
+        if (!target) return;
 
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // Mantener la URL sincronizada con la sección seleccionada.
-                history.replaceState(null, '', href);
-            }
+        e.preventDefault();
+        if (this.classList.contains('nav-link')) {
+            setActiveNavLink(href);
         }
+
+        target.scrollIntoView({
+            behavior: prefersReducedMotion.matches ? 'auto' : 'smooth',
+            block: 'start'
+        });
+
+        // Mover el foco a la sección para que Tab continúe desde ahí
+        // (preventDefault anula ese comportamiento nativo del ancla).
+        target.focus({ preventScroll: true });
+
+        // Mantener la URL sincronizada sin agregar entradas al historial.
+        history.replaceState(null, '', href);
     });
 });
 
-// ============================================
-// EXTERNAL LINKS
-// ============================================
-document.querySelectorAll('a[target="_blank"]').forEach(link => {
-    link.setAttribute('rel', 'noopener noreferrer');
-});
-
-// ============================================
-// NAVIGATION ACTIVE STATE
-// ============================================
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('section[id]');
-
-function updateActiveNavLink() {
-    let currentSection = sections[0]?.getAttribute('id') || '';
-    const activationOffset = 130;
-
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-
-        if (sectionTop - activationOffset <= 0) {
-            currentSection = section.getAttribute('id');
+// Marca como activa la primera sección (en orden del documento) que esté
+// dentro de la franja entre la navegación sticky y la mitad de la pantalla.
+const visibleSections = new Set();
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id);
+        } else {
+            visibleSections.delete(entry.target.id);
         }
     });
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Actualizar al hacer scroll
-window.addEventListener('scroll', updateActiveNavLink);
-
-// Actualizar al cargar la página
-window.addEventListener('load', updateActiveNavLink);
-
-// Respetar hash inicial (ej: abrir directo en #projects)
-window.addEventListener('load', () => {
-    if (isValidSectionHash(window.location.hash)) {
-        setActiveNavLink(window.location.hash);
+    const current = [...sections].find(section => visibleSections.has(section.id));
+    if (current) {
+        setActiveNavLink(`#${current.id}`);
     }
-});
+}, { rootMargin: '-130px 0px -50% 0px' });
+
+sections.forEach(section => sectionObserver.observe(section));
 
 // ============================================
 // SCROLL TO TOP BUTTON
@@ -129,20 +92,14 @@ window.addEventListener('load', () => {
 const scrollToTopBtn = document.getElementById('scroll-to-top');
 
 if (scrollToTopBtn) {
-    // Mostrar/ocultar botón según scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            scrollToTopBtn.classList.add('visible');
-        } else {
-            scrollToTopBtn.classList.remove('visible');
-        }
-    });
+    window.addEventListener('scroll', () => {
+        scrollToTopBtn.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
 
-    // Scroll suave al inicio
-    scrollToTopBtn.addEventListener('click', function() {
+    scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
         });
     });
 }
